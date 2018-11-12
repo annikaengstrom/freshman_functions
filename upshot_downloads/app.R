@@ -46,7 +46,7 @@ server <- function(input, output) {
      data <- get_tibble(path)
   
       
-      kable(path)
+     kable(data)
 
    })
 }
