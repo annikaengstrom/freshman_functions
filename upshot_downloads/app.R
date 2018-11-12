@@ -23,7 +23,7 @@ ui <- fluidPage(
       sidebarPanel(
         textInput("caption", "Enter District:"),
         verbatimTextOutput("value"),
-        actionButton(goButton, "Confirm", icon = NULL, width = NULL, ...)
+        actionButton("button", "Confirm", icon = NULL, width = NULL)
       ),
       
       # Show a plot of the generated distribution
@@ -38,11 +38,12 @@ server <- function(input, output) {
    
    output$distPlot <- renderPlot({
      
-     input$goButton 
-      path <- get_filename(input$race) 
-      get_tibble(path)
-      
-      kable(path)
+     input$button 
+     
+     path <- get_filename(input$caption) 
+     
+     data <- get_tibble(path)
+     
    })
 }
 
