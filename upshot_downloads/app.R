@@ -12,6 +12,7 @@ library(tidyverse)
 library(stringr)
 library(knitr)
 
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
    
@@ -43,7 +44,10 @@ server <- function(input, output) {
      path <- get_filename(input$caption) 
      
      data <- get_tibble(path)
-     
+  
+      
+      kable(path)
+
    })
 }
 

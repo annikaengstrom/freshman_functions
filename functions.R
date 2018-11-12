@@ -1,6 +1,6 @@
 library(tidyverse)
 
-make_filename <- function(race) {
+get_filename <- function(race) {
   race <- str_to_lower(race)
   paste0("https://raw.githubusercontent.com/TheUpshot/2018-live-poll-results/master/data/elections-poll-", race, ".csv")
 }
@@ -15,4 +15,6 @@ get_tibble <- function(path) {
   raw
 }
 
-get_filenames()
+path <- get_filename("ca49-1") 
+
+get_tibble(path)
