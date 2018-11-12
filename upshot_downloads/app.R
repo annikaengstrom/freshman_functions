@@ -9,6 +9,7 @@
 
 library(shiny)
 library(tidyverse)
+library(stringr)
 library(knitr)
 
 
@@ -21,11 +22,9 @@ ui <- fluidPage(
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
       sidebarPanel(
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 30)
+        textInput("caption", "Enter District:"),
+        verbatimTextOutput("value"),
+        actionButton(goButton, "Confirm", icon = NULL, width = NULL, ...)
       ),
       
       # Show a plot of the generated distribution
@@ -40,7 +39,13 @@ server <- function(input, output) {
    
    output$distPlot <- renderPlot({
      
-     
+
+     input$goButton 
+      path <- get_filename(input$race) 
+      get_tibble(path)
+      
+      kable(path)
+
    })
 }
 
