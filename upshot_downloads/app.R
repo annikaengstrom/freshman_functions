@@ -8,6 +8,9 @@
 #
 
 library(shiny)
+library(tidyverse)
+library(stringr)
+library(knitr)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -18,11 +21,9 @@ ui <- fluidPage(
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
       sidebarPanel(
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 30)
+        textInput("caption", "Enter District:"),
+        verbatimTextOutput("value"),
+        actionButton(goButton, "Confirm", icon = NULL, width = NULL, ...)
       ),
       
       # Show a plot of the generated distribution
@@ -36,12 +37,12 @@ ui <- fluidPage(
 server <- function(input, output) {
    
    output$distPlot <- renderPlot({
-      # generate bins based on input$bins from ui.R
-      x    <- faithful[, 2] 
-      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+     
+     input$goButton 
+      path <- get_filename(input$race) 
+      get_tibble(path)
       
-      # draw the histogram with the specified number of bins
-      hist(x, breaks = bins, col = 'darkgray', border = 'white')
+      kable(path)
    })
 }
 
